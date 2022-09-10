@@ -1,0 +1,12 @@
+C:\Users\USER\source\repos\QLVT\QLVT.Common\bin\Debug\netcoreapp3.1\QLVT.Common.deps.json
+C:\Users\USER\source\repos\QLVT\QLVT.Common\bin\Debug\netcoreapp3.1\QLVT.Common.dll
+C:\Users\USER\source\repos\QLVT\QLVT.Common\bin\Debug\netcoreapp3.1\QLVT.Common.pdb
+C:\Users\USER\source\repos\QLVT\QLVT.Common\obj\Debug\netcoreapp3.1\QLVT.Common.csprojAssemblyReference.cache
+C:\Users\USER\source\repos\QLVT\QLVT.Common\obj\Debug\netcoreapp3.1\QLVT.Common.AssemblyInfoInputs.cache
+C:\Users\USER\source\repos\QLVT\QLVT.Common\obj\Debug\netcoreapp3.1\QLVT.Common.AssemblyInfo.cs
+C:\Users\USER\source\repos\QLVT\QLVT.Common\obj\Debug\netcoreapp3.1\QLVT.Common.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\QLVT\QLVT.Common\obj\Debug\netcoreapp3.1\QLVT.Common.dll
+C:\Users\USER\source\repos\QLVT\QLVT.Common\obj\Debug\netcoreapp3.1\QLVT.Common.pdb
+C:\Users\USER\source\repos\QLVT\QLVT.Common\bin\Debug\netcoreapp3.1\QLVT.Common.runtimeconfig.json
+C:\Users\USER\source\repos\QLVT\QLVT.Common\bin\Debug\netcoreapp3.1\QLVT.Common.runtimeconfig.dev.json
+C:\Users\USER\source\repos\QLVT\QLVT.Common\obj\Debug\netcoreapp3.1\QLVT.Common.genruntimeconfig.cache
