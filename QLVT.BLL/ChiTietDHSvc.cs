@@ -9,12 +9,12 @@ using QLVT.DAL.Models;
 
 namespace QLVT.BLL
 {
-	public class DonDHSvc : GenericSvc<DonDHRep, Dondh>
+	public class ChiTietDHSvc : GenericSvc<ChiTietDHRep, Ctdondh>
 	{
-		private DonDHRep donDHRep;
-		public DonDHSvc()
+		private ChiTietDHRep chiTietDHRep;
+		public ChiTietDHSvc()
 		{
-			donDHRep = new DonDHRep();
+			chiTietDHRep = new ChiTietDHRep();
 		}
 
 		public override SingleRsp Read(int id)
@@ -23,19 +23,17 @@ namespace QLVT.BLL
 			res.Data = _rep.Read(id);
 			return res;
 		}
-
-		public SingleRsp CreateDondh(DonDHReq donDHReq)
+		public SingleRsp CreateCTDonDH (ChiTietDHReq chiTietDHReq)
 		{
 			var res = new SingleRsp();
-			Dondh d = new Dondh();
-			d.Sodh = donDHReq.Sodh;
-			d.Ngaydh = donDHReq.Ngaydh;
-			d.Manhacc = donDHReq.Manhacc;
-			res = donDHRep.CreateDondh(d);
+			Ctdondh d = new Ctdondh();
+			d.Sodh = chiTietDHReq.Sodh;
+			d.Mavtu = chiTietDHReq.Mavtu;
+			d.Sldat = chiTietDHReq.Sldat;
+			res = chiTietDHRep.CreateCTDonDH(d);
 			return res;
 		}
-
-		public override SingleRsp Update(Dondh d)
+		public override SingleRsp Update(Ctdondh d)
 		{
 			var res = new SingleRsp();
 
@@ -52,39 +50,29 @@ namespace QLVT.BLL
 
 			return res;
 		}
-
-		public SingleRsp UpdateDondh (DonDHReq donDHReq)
+		public SingleRsp UpdateChiTietDH (ChiTietDHReq chiTietDHReq)
 		{
 			var res = new SingleRsp();
-			Dondh d = new Dondh();
-			d.Sodh = donDHReq.Sodh;
-			d.Ngaydh = donDHReq.Ngaydh;
-			d.Manhacc = donDHReq.Manhacc;
-			res = donDHRep.UpdateDondh(d);
+			Ctdondh d = new Ctdondh();
+			d.Sodh = chiTietDHReq.Sodh;
+			d.Mavtu = chiTietDHReq.Mavtu;
+			d.Sldat = chiTietDHReq.Sldat;
+			res = chiTietDHRep.UpdateChiTietDH(d);
 			return res;
 		}
 
-		public SingleRsp XoaDH(int id)
+		public SingleRsp XoaCtDonDH(int id)
 		{
 			var res = new SingleRsp();
 			try
 			{
-				res.Data = _rep.XoaDonHang(id);
+				res.Data = _rep.XoaCtDonDH(id);
 			}
 			catch (Exception ex)
 			{
 				res.SetError(ex.StackTrace);
 			}
 			return res;
-		}
-
-		public SingleRsp SearchDonDHBySoDH (int Sopx)
-		{
-			var res = new SingleRsp();
-			var donHangs = donDHRep.searchDonDH(Sopx);
-			res.Data = donHangs;
-			return res;
-
 		}
 	}
 }

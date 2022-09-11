@@ -17,6 +17,29 @@ namespace QLVT.DAL
             return res;
         }
 
+        public SingleRsp CreatePhieuXuat(Phieuxuat phieuxuat)
+        {
+            var res = new SingleRsp();
+            using (var context = new QLVTContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var p = context.Phieuxuats.Add(phieuxuat);
+                        context.SaveChanges();
+                        tran.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                    }
+                }
+            }
+            return res;
+        }
+
         public SingleRsp UpdatePhieuXuat(Phieuxuat phieuxuat)
         {
             var res = new SingleRsp();
@@ -38,6 +61,19 @@ namespace QLVT.DAL
                 }
             }
             return res;
+        }
+
+        public int XoaPhieuXuat(int id)
+        {
+            var m = base.All.First(i => i.Sopx == id);
+            Context.Phieuxuats.Remove(m);
+            Context.SaveChanges();
+            return m.Sopx;
+        }
+
+        public List<Phieuxuat> searchPhieuXuat(int idPhieuXuat)
+        {
+            return All.Where(x => x.Sopx == idPhieuXuat).ToList();
         }
     }
 }

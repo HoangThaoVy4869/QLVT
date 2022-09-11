@@ -67,6 +67,20 @@ namespace QLVT.BLL
 			return res;
 		}
 
+		public SingleRsp XoaVattu(int id)
+		{
+			var res = new SingleRsp();
+			try
+			{
+				res.Data = _rep.XoaVattu(id);
+			}
+			catch (Exception ex)
+			{
+				res.SetError(ex.StackTrace);
+			}
+			return res;
+		}
+
 
 		// Tim kiem + phan trang
 		public SingleRsp SearchVatTu(SearchVatTuReq searchVatTuReq)

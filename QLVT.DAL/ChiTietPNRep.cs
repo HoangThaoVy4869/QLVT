@@ -8,15 +8,15 @@ using QLVT.DAL.Models;
 
 namespace QLVT.DAL
 {
-	public class DonDHRep : GenericRep<QLVTContext, Dondh>
+	public class ChiTietPNRep: GenericRep<QLVTContext, Ctphieunhap>
 	{
-        public DonDHRep() { }
-        public override Dondh Read(int id)
-        {
-            var res = All.FirstOrDefault(n => n.Sodh == id);
-            return res;
-        }
-        public SingleRsp CreateDondh(Dondh dondh)
+		public ChiTietPNRep() { }
+		public override Ctphieunhap Read(int id)
+		{
+			var res = All.FirstOrDefault(n => n.Sopn == id);
+			return res;
+		}
+        public SingleRsp CreateChiTietPN(Ctphieunhap ctphieunhap)
         {
             var res = new SingleRsp();
             using (var context = new QLVTContext())
@@ -25,7 +25,7 @@ namespace QLVT.DAL
                 {
                     try
                     {
-                        var p = context.Dondhs.Add(dondh);
+                        var p = context.Ctphieunhaps.Add(ctphieunhap);
                         context.SaveChanges();
                         tran.Commit();
                     }
@@ -38,7 +38,7 @@ namespace QLVT.DAL
             }
             return res;
         }
-        public SingleRsp UpdateDondh (Dondh dondh)
+        public SingleRsp UpdateChiTietPN(Ctphieunhap ctphieunhap)
         {
             var res = new SingleRsp();
             using (var context = new QLVTContext())
@@ -47,7 +47,7 @@ namespace QLVT.DAL
                 {
                     try
                     {
-                        var p = context.Dondhs.Update(dondh);
+                        var p = context.Ctphieunhaps.Update(ctphieunhap);
                         context.SaveChanges();
                         tran.Commit();
                     }
@@ -61,18 +61,13 @@ namespace QLVT.DAL
             return res;
         }
 
-        public int XoaDonHang(int id)
+        public int XoaCtPhieuNhap(int id)
         {
-            var m = base.All.First(i => i.Sodh == id);
-            Context.Dondhs.Remove(m);
+            var m = base.All.First(i => i.Sopn == id);
+            Context.Ctphieunhaps.Remove(m);
             Context.SaveChanges();
-            return m.Sodh;
+            return m.Sopn;
         }
 
-        public List<Dondh> searchDonDH(int idDonDH)
-        {
-            return All.Where(x => x.Sodh == idDonDH).ToList();
-        }
     }
 }
-

@@ -26,11 +26,35 @@ namespace QLVT.Web.Controllers
 			res = tonKhoSvc.Read(simpleReq.Id);
 			return Ok(res);
 		}
+
+		[HttpPost("create-tonkho")]
+		public IActionResult CreateTonKho([FromBody] TonKhoReq tonKhoReq)
+		{
+			var res = new SingleRsp();
+			res = tonKhoSvc.CreateTonKho(tonKhoReq);
+			return Ok(res);
+		}
+
 		[HttpPost("update-tonkho")]
 		public IActionResult UpdateTonKho ([FromBody] TonKhoReq tonKhoReq)
 		{
 			var res = new SingleRsp();
 			res = tonKhoSvc.UpdateTonKho(tonKhoReq);
+			return Ok(res);
+		}
+
+		[HttpDelete("xoa-ton-kho")]
+		public IActionResult XoaTonKho([FromBody] SimpleReq req)
+		{
+			var res = tonKhoSvc.XoaTonKho(req.Id);
+			return Ok(res);
+		}
+
+		[HttpPost("Tim-TonKho-by-MaVatTu")]
+		public IActionResult SearchProduct([FromBody] int maVatTu)
+		{
+			var res = new SingleRsp();
+			res = tonKhoSvc.SearchSlTonKhoByMaVT(maVatTu);
 			return Ok(res);
 		}
 	}

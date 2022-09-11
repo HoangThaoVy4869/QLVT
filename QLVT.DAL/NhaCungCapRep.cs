@@ -16,7 +16,28 @@ namespace QLVT.DAL
             var res = All.FirstOrDefault(n => n.Manhacc == id);
             return res;
         }
-
+        public SingleRsp CreateNhaCC(Nhacungcap nhacungcap)
+        {
+            var res = new SingleRsp();
+            using (var context = new QLVTContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var p = context.Nhacungcaps.Add(nhacungcap);
+                        context.SaveChanges();
+                        tran.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                    }
+                }
+            }
+            return res;
+        }
         public SingleRsp UpdateNhaCC (Nhacungcap nhacungcap)
         {
             var res = new SingleRsp();
@@ -38,6 +59,19 @@ namespace QLVT.DAL
                 }
             }
             return res;
+        }
+
+        public int XoaNhaCungCap(int id)
+        {
+            var m = base.All.First(i => i.Manhacc == id);
+            Context.Nhacungcaps.Remove(m);
+            Context.SaveChanges();
+            return m.Manhacc;
+        }
+
+        public List<Nhacungcap> searchNhaCC(string TenNhaCC)
+        {
+            return All.Where(x => x.Tennhacc.Contains(TenNhaCC)).ToList();
         }
     }
 }

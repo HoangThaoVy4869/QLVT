@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using QLVT.Common.BLL;
 using QLVT.Common.Req;
@@ -21,6 +22,18 @@ namespace QLVT.BLL
 		{
 			var res = new SingleRsp();
 			res.Data = _rep.Read(id);
+			return res;
+		}
+
+		public SingleRsp CreateNhaCC(NhaCungCapReq nhaCungCapReq)
+		{
+			var res = new SingleRsp();
+			Nhacungcap n = new Nhacungcap();
+			n.Manhacc = nhaCungCapReq.Manhacc;
+			n.Tennhacc = nhaCungCapReq.Tennhacc;
+			n.Diachi = nhaCungCapReq.Diachi;
+			n.Dienthoai = nhaCungCapReq.Dienthoai;
+			res = nhaCungCapRep.CreateNhaCC(n);
 			return res;
 		}
 
@@ -51,6 +64,39 @@ namespace QLVT.BLL
 			n.Diachi = nhaCungCapReq.Diachi;
 			n.Dienthoai = nhaCungCapReq.Dienthoai;
 			res = nhaCungCapRep.UpdateNhaCC(n);
+			return res;
+		}
+
+		public SingleRsp XoaNhaCungCap(int id)
+		{
+			var res = new SingleRsp();
+			try
+			{
+				res.Data = _rep.XoaNhaCungCap(id);
+			}
+			catch (Exception ex)
+			{
+				res.SetError(ex.StackTrace);
+			}
+			return res;
+		}
+
+
+		public SingleRsp SearchNhaCCByMaNCC(SearchNhaCCReq NhaCC)
+		{
+			var res = new SingleRsp();
+			var nhaCCs = nhaCungCapRep.searchNhaCC(NhaCC.Keyword);
+			int NhaccCount = nhaCCs.Count;
+			int totalPage, offsetSize;
+			offsetSize = NhaCC.Size * (NhaCC.Page - 1);
+			totalPage = (NhaccCount % NhaCC.Size) == 0 ? (NhaccCount / NhaCC.Size) : (NhaccCount / NhaCC.Size) + 1;
+			var p = new
+			{
+				Data = nhaCCs.Skip(offsetSize).Take(NhaCC.Size).ToList(),
+				Page = NhaCC.Page,
+				Size = NhaCC.Size
+			};
+			res.Data = p;
 			return res;
 		}
 	}

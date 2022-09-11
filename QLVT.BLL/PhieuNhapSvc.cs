@@ -23,6 +23,16 @@ namespace QLVT.BLL
 			res.Data = _rep.Read(id);
 			return res;
 		}
+		public SingleRsp CreatePhieuNhap(PhieuNhapReq phieuNhapReq)
+		{
+			var res = new SingleRsp();
+			Phieunhap p = new Phieunhap();
+			p.Sopn = phieuNhapReq.Sopn;
+			p.Ngaynhap = phieuNhapReq.Ngaynhap;
+			p.Sodh = phieuNhapReq.Sodh;
+			res = phieuNhapRep.CreatePhieuNhap(p);
+			return res;
+		}
 
 		public override SingleRsp Update(Phieunhap p)
 		{
@@ -51,6 +61,30 @@ namespace QLVT.BLL
 			p.Sodh = phieuNhapReq.Sodh;
 			res = phieuNhapRep.UpdatePhieuNhap(p);
 			return res;
+		}
+
+		public SingleRsp XoaPhieuNhap(int id)
+		{
+			var res = new SingleRsp();
+			try
+			{
+				res.Data = _rep.XoaPhieuNhap(id);
+			}
+			catch (Exception ex)
+			{
+				res.SetError(ex.StackTrace);
+			}
+			return res;
+		}
+
+
+		public SingleRsp SearchPhieuNhapBySoPX(int Sopx)
+		{
+			var res = new SingleRsp();
+			var phieuNhaps = phieuNhapRep.searchPhieuNhap(Sopx);
+			res.Data = phieuNhaps;
+			return res;
+
 		}
 	}
 }

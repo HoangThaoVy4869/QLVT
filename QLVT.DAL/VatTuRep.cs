@@ -18,13 +18,6 @@ namespace QLVT.DAL
 			return res;
 		}
 
-		//public int Remove(int id)
-		//{
-		//	var m = base.All.First(i => i.Mavtu == id);
-		//	m = base.Delete(m);
-		//	return m.Mavtu;
-		//}
-
         #region -- Methods --
         public SingleRsp CreateVatTu(Vattu vattu)
         {
@@ -72,6 +65,13 @@ namespace QLVT.DAL
             return res;
         }
 
+        public int XoaVattu(int id)
+        {
+            var m = base.All.First(i => i.Mavtu == id);
+            Context.Vattus.Remove(m);
+            Context.SaveChanges();
+            return m.Mavtu;
+        }
 
         public List<Vattu> SearchVatTu(string keyWord)
 		{             

@@ -24,6 +24,21 @@ namespace QLVT.BLL
 			return res;
 		}
 
+		public SingleRsp CreateTonKho (TonKhoReq tonKhoReq)
+		{
+			var res = new SingleRsp();
+			Tonkho t = new Tonkho();
+			t.Maso = tonKhoReq.Maso;
+			t.Mavtu = tonKhoReq.Mavtu;
+			t.Tongsln = tonKhoReq.Tongsln;
+			t.Tongslx = tonKhoReq.Tongslx;
+			t.Sldau = tonKhoReq.Sldau;
+			t.Slcuoi = tonKhoReq.Slcuoi;
+			t.Ngaythang = tonKhoReq.Ngaythang;
+			res = tonKhoRep.CreateTonKho(t);
+			return res;
+		}
+
 		public override SingleRsp Update(Tonkho t)
 		{
 			var res = new SingleRsp();
@@ -55,6 +70,29 @@ namespace QLVT.BLL
 			t.Ngaythang = tonKhoReq.Ngaythang;
 			res = tonKhoRep.UpdateTonKho(t);
 			return res;
+		}
+
+		public SingleRsp XoaTonKho(int id)
+		{
+			var res = new SingleRsp();
+			try
+			{
+				res.Data = _rep.XoaTonKho(id);
+			}
+			catch (Exception ex)
+			{
+				res.SetError(ex.StackTrace);
+			}
+			return res;
+		}
+
+		public SingleRsp SearchSlTonKhoByMaVT(int maVatTu)
+		{
+			var res = new SingleRsp();
+			var tonKho = tonKhoRep.searchSLTonKho(maVatTu);
+			res.Data = tonKho;
+			return res;
+
 		}
 	}
 }

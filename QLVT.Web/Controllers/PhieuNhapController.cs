@@ -26,11 +26,33 @@ namespace QLVT.Web.Controllers
 			res = phieuNhapSvc.Read(simpleReq.Id);
 			return Ok(res);
 		}
+		[HttpPost("create-phieunhap")]
+		public IActionResult CreatePhieuNhap([FromBody] PhieuNhapReq phieuNhapReq)
+		{
+			var res = new SingleRsp();
+			res = phieuNhapSvc.CreatePhieuNhap(phieuNhapReq);
+			return Ok(res);
+		}
 		[HttpPost("update-phieunhap")]
 		public IActionResult UpdatePhieuNhap([FromBody] PhieuNhapReq phieuNhapReq)
 		{
 			var res = new SingleRsp();
 			res = phieuNhapSvc.UpdatePhieuNhap(phieuNhapReq);
+			return Ok(res);
+		}
+
+		[HttpDelete("xoa-phieu-nhap")]
+		public IActionResult XoaPhieuNhap([FromBody] SimpleReq req)
+		{
+			var res = phieuNhapSvc.XoaPhieuNhap(req.Id);
+			return Ok(res);
+		}
+
+		[HttpPost("Tim-PhieuNhap-by-Sopn")]
+		public IActionResult SearchProduct([FromBody] int Sopn)
+		{
+			var res = new SingleRsp();
+			res = phieuNhapSvc.SearchPhieuNhapBySoPX(Sopn);
 			return Ok(res);
 		}
 	}

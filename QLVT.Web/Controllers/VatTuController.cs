@@ -47,5 +47,12 @@ namespace QLVT.Web.Controllers
 			res = vatTuSvc.UpdateVatTu(vatTuReq);
 			return Ok(res);
 		}
+
+		[HttpDelete("xoa-vattu")]
+		public IActionResult XoaVattu([FromBody] SimpleReq req)
+		{
+			var res = vatTuSvc.XoaVattu(req.Id);
+			return Ok(res);
+		}
 	}
 }

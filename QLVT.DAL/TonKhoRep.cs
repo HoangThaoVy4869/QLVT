@@ -18,6 +18,29 @@ namespace QLVT.DAL
             return res;
         }
 
+        public SingleRsp CreateTonKho(Tonkho tonkho)
+        {
+            var res = new SingleRsp();
+            using (var context = new QLVTContext())
+            {
+                using (var tran = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var p = context.Tonkhos.Add(tonkho);
+                        context.SaveChanges();
+                        tran.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        res.SetError(ex.StackTrace);
+                    }
+                }
+            }
+            return res;
+        }
+
         public SingleRsp UpdateTonKho (Tonkho tonkho)
         {
             var res = new SingleRsp();
@@ -40,5 +63,19 @@ namespace QLVT.DAL
             }
             return res;
         }
+
+        public int XoaTonKho(int id)
+        {
+            var m = base.All.First(i => i.Maso == id);
+            Context.Tonkhos.Remove(m);
+            Context.SaveChanges();
+            return m.Maso;
+        }
+
+        public List<Tonkho> searchSLTonKho(int maVatTu)
+        {
+            return All.Where(x => x.Mavtu == maVatTu).ToList();
+        }
+
     }
 }

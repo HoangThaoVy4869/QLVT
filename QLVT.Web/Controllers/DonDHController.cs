@@ -26,11 +26,35 @@ namespace QLVT.Web.Controllers
 			res = donDHSvc.Read(simpleReq.Id);
 			return Ok(res);
 		}
+
+		[HttpPost("create-donhang")]
+		public IActionResult CreateDondh([FromBody] DonDHReq donDHReq)
+		{
+			var res = new SingleRsp();
+			res = donDHSvc.CreateDondh(donDHReq);
+			return Ok(res);
+		}
+
 		[HttpPost("update-donhang")]
 		public IActionResult UpdateDondh ([FromBody] DonDHReq donDHReq)
 		{
 			var res = new SingleRsp();
 			res = donDHSvc.UpdateDondh(donDHReq);
+			return Ok(res);
+		}
+
+		[HttpDelete("xoa-don-dh")]
+		public IActionResult XoaDonDH([FromBody] SimpleReq req)
+		{
+			var res = donDHSvc.XoaDH(req.Id);
+			return Ok(res);
+		}
+
+		[HttpPost("Tim-DonDH-by-SoDH")]
+		public IActionResult SearchProduct([FromBody] int Sopx)
+		{
+			var res = new SingleRsp();
+			res = donDHSvc.SearchDonDHBySoDH(Sopx);
 			return Ok(res);
 		}
 	}
